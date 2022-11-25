@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<style>
+div.Note{
+	background-color: lightgrey;
+	padding: 15px;
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-radius: 25px;
+	width: 180px;
+	float: left;
+
+}
+
+button {
+  border: none;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 17px;
+  
+}
+
+button.delete {
+	background-color: #515057;
+	margin: auto
+}
+
+.yellow {
+	background-color: yellow;
+	padding: 10px;
+	border: 2px solid black
+}
+
+.blue {
+	background-color: blue;
+	padding: 10px;
+	border: 2px solid black
+}
+
+
+.red {
+	background-color: red;
+	padding: 10px;
+	border: 2px solid black
+}
+
+.grey {
+	background-color: lightgrey;
+	padding: 10px;
+	border: 2px solid black
+}
+
+</style>
+<body>
+<input type="button" value="Add Note" onclick="addRow()">
+<br>
+<br>
+<div id="main">
+</div>
+</body>
+<script>
+function addRow() {
+  const div = document.createElement('div');
+
+  div.className = 'Note';
+  div.id = 'Note';
+  div.innerHTML = `
+    <textarea style = "height: 170px;width:160px; resize: none;" >Enter Note here</textarea>
+	<br>
+	
+    <button class="button yellow" onclick="Yellow(this)" /> </button>
+	<button class="button blue" onclick="Blue(this)" /> </button>
+	<button class="button red" onclick="Red(this)" /> </button>
+	<button class="button grey" onclick="Grey(this)" /> </button>
+	<br><br>
+	<button class="button delete" onclick="DeleteNote(this)" />Delete</button>
+  `;
+  document.getElementById('main').appendChild(div);
+}
+
+function DeleteNote(input) {
+  document.getElementById('main').removeChild(input.parentNode);
+}
+
+function Yellow(input) {
+    input.parentNode.style.backgroundColor = "yellow";
+}
+
+function Blue(input) {
+    input.parentNode.style.backgroundColor ="blue";
+}
+
+function Red(input) {
+    input.parentNode.style.backgroundColor = "red";
+}
+
+function Grey(input) {
+    input.parentNode.style.backgroundColor = "lightgrey";
+}
+</script>
+</html>
