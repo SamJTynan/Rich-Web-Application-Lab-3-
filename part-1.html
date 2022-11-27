@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<style>
+div.Note{
+	background-color: lightgrey;
+	padding: 15px;
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-radius: 25px;
+	width: 180px;
+	float: left;
+
+}
+
+button {
+  border: none;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 17px;
+  
+}
+
+button.delete {
+	background-color: #515057;
+	margin: auto
+}
+
+.yellow {
+	background-color: yellow;
+	padding: 10px;
+	border: 2px solid black
+}
+
+.blue {
+	background-color: blue;
+	padding: 10px;
+	border: 2px solid black
+}
+
+
+.red {
+	background-color: red;
+	padding: 10px;
+	border: 2px solid black
+}
+
+.grey {
+	background-color: lightgrey;
+	padding: 10px;
+	border: 2px solid black
+}
+
+</style>
+<body>
+<input type="button" id = "button" value="Add Note">
+<div id="main">
+</div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.1.0/rxjs.umd.js">
+const button = document.getElementById('button');
+const main = document.getElementById('main');
+const click = fromEvent(button, 'click');
+
+
+function createnote() {
+  const div = document.createElement('div');
+  div.className = 'Note';
+  div.id = 'Note';
+  div.innerHTML = `<textarea style = "height: 170px;width:160px; resize: none;" >Enter Note here</textarea>
+  <br> <button class="button yellow"/> </button>
+  <button class="button blue"/> </button>
+  <button class="button red" /> </button>
+  <button class="button grey" /> </button> 
+  <button class="button delete" />Delete</button>; `;
+  document.getElementById('main').appendChild(div);
+}
+
+click.pipe(tap(() => createnote())).subscribe();
+</script>
+</html>
