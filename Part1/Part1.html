@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<style>
+div.Note{
+	background-color: lightgrey;
+	padding: 15px;
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-radius: 25px;
+	width: 180px;
+	float: left;
+
+}
+
+button {
+  border: none;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 17px;
+  
+}
+
+button.delete {
+	background-color: #515057;
+	margin: auto
+}
+
+.yellow {
+	background-color: yellow;
+	padding: 10px;
+	border: 2px solid black
+}
+
+.blue {
+	background-color: blue;
+	padding: 10px;
+	border: 2px solid black
+}
+
+
+.red {
+	background-color: red;
+	padding: 10px;
+	border: 2px solid black
+}
+
+.grey {
+	background-color: lightgrey;
+	padding: 10px;
+	border: 2px solid black
+}
+
+</style>
+<body>
+<input type="button" id = "button" value="Add Note">
+<div id="main">
+</div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.1.0/rxjs.umd.js">
+const { Observable, fromEvent } = rxjs;
+const button = document.getElementById('button');
+const main = document.getElementById('main');
+
+function createnote() {
+  const div = document.createElement('div');
+  div.className = 'Note';
+  div.id = 'Note';
+  div.innerHTML = `<textarea style = "height: 170px;width:160px; resize: none;" >Enter Note here</textarea>
+  <br> 
+  <button class="button yellow" id = "yellow" /> </button>
+	<button class="button blue" id = "blue"  /> </button>
+	<button class="button red" id = "red" " /> </button>
+	<button class="button grey" id = "grey" " /> </button>
+	<br><br>
+	<button class="button delete" id = "delete"" />Delete</button>
+  `;
+  document.getElementById('main').appendChild(div);
+
+  const yellow = document.getElementById('yellow');
+  const blue = document.getElementById('blue');
+  const red = document.getElementById('red');
+  const grey = document.getElementById('grey');
+  const delete_ = document.getElementById('delete');
+
+  const yellowbut = fromEvent(yellow, 'click');
+  const bluebut = fromEvent(blue, 'click');
+  const redbut = fromEvent(red, 'click');
+  const greybut = fromEvent(grey, 'click');
+  const delbut = fromEvent(delete_, 'click');
+
+  yellowbut.pipe(tap(() => yellowcol(document.getElementById('Note')))).subscribe();
+  bluebut.pipe(tap(() => bluecol(document.getElementById('Note')))).subscribe();
+  redbut.pipe(tap(() => redcol(document.getElementById('Note')))).subscribe();
+  greybut.pipe(tap(() => greycol(document.getElementById('Note')))).subscribe();
+  delbut.pipe(tap(() => delcol(document.getElementById('Note')))).subscribe();
+}
+
+const click = fromEvent(button, 'click');
+
+function yellowcol(Input) {
+  Input.style.background = 'yellow';
+}
+
+function bluecol(Input) {
+  Input.style.background = 'blue';
+}
+
+function redcol(Input) {
+  Input.style.background = 'red';
+}
+
+function greycol(Input) {
+  Input.style.background = 'grey';
+}
+
+function delcol(Input) {
+  document.getElementById('main').removeChild(input.parentElement);
+}
+
+click.pipe(tap(() => createnote())).subscribe();
+
+</script>
+</html>
