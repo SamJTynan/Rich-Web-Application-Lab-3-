@@ -1,4 +1,5 @@
-const { Observable, fromEvent,tap } = rxjs; 
+const { fromEvent, interval, merge, EMPTY } = rxjs;
+
 const {
   takeWhile,
   takeUntil,
@@ -8,38 +9,33 @@ const {
   startWith,
   repeat,
   switchMapTo
-} = rxjs/operators;
+} = rxjs;
 
 
-
-
-const Hour = document.getElementById('Hour');
-const Minute = document.getElementById('Minute');
 const Second = document.getElementById('Second');
 const button = document.getElementById('button');
 const click = fromEvent(button, 'click');
 
-click.subscribe(x => countdown(Hour.value,Minute.value,Second.value));
+click.subscribe(x => countdown(Second.value));
 
-function countdown(Hour, Minute, Second) {
-  document.getElementById('hrdis').innerHTML = Hour;
+function countdown(Seconds) {
+ /*  document.getElementById('hrdis').innerHTML = Hour;
   document.getElementById('mindis').innerHTML = Minute;
-  document.getElementById('secdis').innerHTML = Second;
-	
-startClick$.pipe(mapTo(true))
-  .pipe(
+  document.getElementById('secdis').innerHTML = Second; */
+const display = document.getElementById('secdis');
+var startValue = parseInt(Seconds);
+
+
+  click.pipe(
     switchMap(shouldStart => (shouldStart ? interval(1000) : EMPTY)),
     mapTo(-1),
-    scan((acc: number, curr: number) => acc + curr, startValue),
+    scan((acc= number, curr= number) => acc + curr, startValue),
     takeWhile(val => val >= 0),
     startWith(startValue),
     repeat()
   )
   .subscribe(val => {
-    counterDisplayHeader.innerHTML = val.toString();
+    display.innerHTML = val.toString();
   });
-
-  
-  
-
 }
+
