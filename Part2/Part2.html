@@ -1,55 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-</head>
+
+<head><script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/7.5.7/rxjs.umd.min.js"></script></head>
 <body>
     <div id="main">
       <form id="myForm">
-        <input
-          type="text"
-          id="Hour"
-          style="height: 30px; width: 30px; float: left"
-        />
-        <input
-          type="text"
-          id="Minute"
-          style="height: 30px; width: 30px; float: left"
-        />
-        <input
-          type="text"
-          id="Second"
-          style="height: 30px; width: 30px; float: left"
-        />
+        <input type="text" id="Second" style="height: 30px; width: 50px; float: left"/>
       </form>
-      <br /><br/>
+      <br/><br/>
       <input type="button" id="button" value="Start Countdown" />
-      <span class="hrdis"></span>
-      <span>:</span>
-      <span class="mindis"></span>
-      <span>:</span>
-      <span class="secdis"></span>
+      <br/><br/>     
+      <span id="secdis"></span>
     </div>
   </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.1.0/rxjs.umd.js">
-const { Observable, fromEvent } = rxjs; 
-
-const Hour = <HTMLInputElement>document.getElementById('Hour') </HTMLInputElement>;
-const Minute = <HTMLInputElement>document.getElementById('Minute') </HTMLInputElement>;
-const Second = <HTMLInputElement>document.getElementById('Second') </HTMLInputElement>;
-const button = document.getElementById('button');
-const click = fromEvent(button, 'click');
-
-click
-  .pipe(tap(() => countdown(Hour.value, Minute.value, Second.value)))
-  .subscribe();
-
-function countdown(Hour, Minute, Second) {
-  document.getElementById('hrdis').innerHTML = Hour;
-  document.getElementById('mindis').innerHTML = Minute;
-  document.getElementById('secdis').innerHTML = Second;
-
-
-}
-</script>
-</html>
-  
